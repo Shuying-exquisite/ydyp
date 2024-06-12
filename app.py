@@ -1,3 +1,11 @@
+# 修改之前的出错代码行
+# from collections import Iterable
+
+# 修改为以下
+try:
+    from collections.abc import Iterable
+except ImportError:
+    from collections import Iterable
 import streamlit as st
 import subprocess
 import os
