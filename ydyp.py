@@ -11,12 +11,12 @@
 #   - [1.30]: [同一环境变量获取]
 # new Env("移动云盘")
 import sys
+print(sys.path)
 import os
 import random
 import re
 import time
 from os import path
-
 import requests
 
 ua = 'Mozilla/5.0 (Linux; Android 11; M2012K10C Build/RP1A.200720.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/90.0.4430.210 Mobile Safari/537.36 MCloudApp/10.0.1'
