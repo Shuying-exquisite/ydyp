@@ -10,6 +10,7 @@
 # 更新日志:
 #   - [1.30]: [同一环境变量获取]
 # new Env("移动云盘")
+import sys
 import os
 import random
 import re
