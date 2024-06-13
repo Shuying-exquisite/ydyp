@@ -796,7 +796,7 @@ class YP:
 if __name__ == "__main__":
     token = st.text_input("请输入 token:")
     if not token:
-        st.write(f'⛔️未获取到ck变量：请检查变量 {env_name} 是否填写')
+        st.write(f'⛔️未获取到ck变量：请检查变量 {token} 是否填写')
         exit(0)
 
     cookies = re.split(r'[@\n]', token)
