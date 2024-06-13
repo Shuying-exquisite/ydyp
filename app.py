@@ -9,42 +9,38 @@ def check_and_upgrade_python():
     if (major, minor, micro) != (3, 11, 9):
         st.warning(f"当前 Python 版本是 {major}.{minor}.{micro}，将自动升级到 3.11.9。")
         # Download and install Python 3.11.9
-        if sys.platform == "linux" or sys.platform == "darwin":
-            # Linux or macOS
-            subprocess.check_call(["sudo", "apt-get", "update"])
-            subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11"])
-            subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-venv"])
-            subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-pip"])
-        elif sys.platform == "win32":
-            # Windows
-            subprocess.check_call(["powershell", "-Command", "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe -OutFile python-3.11.9-amd64.exe"])
-            subprocess.check_call(["python-3.11.9-amd64.exe", "/quiet", "InstallAllUsers=1", "PrependPath=1"])
-        else:
-            st.error("不支持的操作系统")
+        try:
+            if sys.platform == "linux" or sys.platform == "darwin":
+                # Linux or macOS
+                subprocess.check_call(["sudo", "apt-get", "update"])
+                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11"])
+                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-venv"])
+                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-pip"])
+            elif sys.platform == "win32":
+                # Windows
+                subprocess.check_call(["powershell", "-Command", "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe -OutFile python-3.11.9-amd64.exe"])
+                subprocess.check_call(["python-3.11.9-amd64.exe", "/quiet", "InstallAllUsers=1", "PrependPath=1"])
+            else:
+                st.error("不支持的操作系统")
+                return False
+        except subprocess.CalledProcessError as e:
+            st.error(f"升级Python版本时出错: {e}")
             return False
 
         # Restart script with new Python version
         os.execl(sys.executable, sys.executable, *sys.argv)
     return True
 
-def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-required_packages = ["streamlit", "requests", "PyExecJS"]
-
-for package in required_packages:
-    try:
-        __import__(package.split("==")[0])
-    except ImportError:
-        st.warning(f"正在安装 {package}...")
-        install_package(package)
-
 import requests
 import execjs
 
 def run_script(token):
-    result = subprocess.run([sys.executable, "ydyp.py", token], capture_output=True, text=True)
-    return result.stdout, result.stderr
+    try:
+        result = subprocess.run([sys.executable, "ydyp.py", token], capture_output=True, text=True)
+        return result.stdout, result.stderr
+    except subprocess.CalledProcessError as e:
+        st.error(f"运行脚本时出错: {e}")
+        return "", str(e)
 
 def main():
     if not check_and_upgrade_python():
@@ -68,3 +64,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
