@@ -1,59 +1,30 @@
-import sys
-import os
-import subprocess
 import streamlit as st
+import subprocess
+import os
 
-def check_and_upgrade_python():
-    # Check current Python version
-    major, minor, micro = sys.version_info[:3]
-    if (major, minor, micro) != (3, 11, 9):
-        st.warning(f"当前 Python 版本是 {major}.{minor}.{micro}，将自动升级到 3.11.9。")
-        # Download and install Python 3.11.9
-        try:
-            if sys.platform == "linux" or sys.platform == "darwin":
-                # Linux or macOS
-                subprocess.check_call(["sudo", "apt-get", "update"])
-                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11"])
-                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-venv"])
-                subprocess.check_call(["sudo", "apt-get", "install", "-y", "python3.11-pip"])
-            elif sys.platform == "win32":
-                # Windows
-                subprocess.check_call(["powershell", "-Command", "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe -OutFile python-3.11.9-amd64.exe"])
-                subprocess.check_call(["python-3.11.9-amd64.exe", "/quiet", "InstallAllUsers=1", "PrependPath=1"])
-            else:
-                st.error("不支持的操作系统")
-                return False
-        except subprocess.CalledProcessError as e:
-            st.error(f"升级Python版本时出错: {e}")
-            return False
-
-        # Restart script with new Python version
-        os.execl(sys.executable, sys.executable, *sys.argv)
-    return True
-
-import requests
-import execjs
-
+# 定义运行脚本的函数
 def run_script(token):
-    try:
-        result = subprocess.run([sys.executable, "ydyp.py", token], capture_output=True, text=True)
-        return result.stdout, result.stderr
-    except subprocess.CalledProcessError as e:
-        st.error(f"运行脚本时出错: {e}")
-        return "", str(e)
+    # 运行脚本并捕获输出
+    result = subprocess.run(["python", "ydyp.py", token], capture_output=True, text=True)
 
+    # 返回结果
+    return result.stdout, result.stderr
+
+# 主函数
 def main():
-    if not check_and_upgrade_python():
-        return
-
     st.title("ydyp.py 脚本参数设置")
 
+    # 用户输入环境变量值
     token = st.text_input("输入参数")
 
+    # 确认按钮
     if st.button("运行脚本"):
+        # 检查参数是否为空
         if token:
+            # 运行脚本
             stdout, stderr = run_script(token)
 
+            # 显示输出
             st.subheader("脚本输出")
             st.text(stdout)
             if stderr:
@@ -64,4 +35,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
