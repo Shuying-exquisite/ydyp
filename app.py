@@ -862,8 +862,7 @@ if __name__ == "__main__":
         msg = f"失效账号:\n{err_accounts}\n-错误信息:\n{err_message}\n-云朵数量: \n{user_amount}"
         send('中国移动云盘任务信息', msg)
     else:
-        print('通知服务不可用')
-"""
+        print('通知服务不可用')"""
     return script
 
 # Streamlit 应用
