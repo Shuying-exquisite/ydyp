@@ -35,9 +35,11 @@
 在cookies中找到：authorization，并复制其中内容
 
 ![](image/5.png)
+
 ## 2.token格式
 
 Token格式为：
 
 ![](image/6.png)
+
 authorization中的basic-==#所登录移动云盘账号的手机号#00
