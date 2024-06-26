@@ -800,7 +800,7 @@ if __name__ == "__main__":
     st.markdown(markdown_text)
     token = st.text_input("请输入 token，token格式详见操作文档:")
     if st.button("开始任务"):
-        if token:
+        if token:st.write("开始执行任务")
         else: st.write("您输入的ck有误，请重新输入。")
     if not token: st.stop()
     if not token:
