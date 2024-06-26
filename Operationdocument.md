@@ -14,30 +14,30 @@
 
 ### 操作步骤
 
-1）打开无痕模式![](images/1.png)
+1）打开无痕模式![](image/1.png)
 
 2）输入链接https://yun.139.com/m/#/main?linkshare=1登录移动云盘账号
 
 3）点击中心选项
 
-![](images/2.png)
+![](image/2.png)
 
 4)找到工具箱
 
-![](images/3.png)
+![](image/3.png)
 
 5)选择开发者工具
 
-![](images/4.png)
+![](image/4.png)
 
 6）开发者工具中选择cookies，然后复制cookies
 
 在cookies中找到：authorization，并复制其中内容
 
-![](images/5.png)
+![](image/5.png)
 ## 2.token格式
 
 Token格式为：
 
-![](images/6.png)
+![](image/6.png)
 authorization中的basic-==#所登录移动云盘账号的手机号#00
