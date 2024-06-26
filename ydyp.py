@@ -798,7 +798,12 @@ if __name__ == "__main__":
 # 移动云盘自动化任务程序
 """
     st.markdown(markdown_text)
-    token = st.text_input("请输入 token:")
+    token = st.text_input("请输入 token:token格式详见操作文档")
+    if st.button("开始任务"):
+        if token:
+            st.write("您输入的变量值是:", token)
+        else: st.write("您输入的ck有误，请重新输入。")
+    if not wc: st.stop()
     if not token:
         st.write(f'⛔️未获取到ck变量：请检查变量 {token} 是否填写')
         exit(0)
