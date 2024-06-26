@@ -14,7 +14,7 @@
 
 ### 操作步骤
 
-1）打开无痕模式![](https://github.com/Shuying-exquisite/ydyp/blob/main/image/1.png)
+1）打开无痕模式![](image/1.png)
 
 
 2）输入链接https://yun.139.com/m/#/main?linkshare=1登录移动云盘账号
