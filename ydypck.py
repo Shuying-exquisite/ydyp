@@ -8,7 +8,7 @@ embedded_url = "https://yun.139.com/m/#/login"
 
 # 定义 iframe
 iframe_code = f"""
-<iframe id="embeddedPage" src="{embedded_url}" width="600" height="400"></iframe>
+<iframe id="embeddedPage" src="{embedded_url}" width="1400" height="900"></iframe>
 <button onclick="getCK()">获取 CK</button>
 <p id="ckValue"></p>
 
@@ -29,4 +29,5 @@ function getCK() {{
 """
 
 # 渲染 iframe 和按钮
-components.html(iframe_code, height=650)
+components.html(iframe_code, height=950, width=1500)
+
