@@ -55,8 +55,8 @@ windows端：下载edge，安装插件milk-cookie manager
 
 ## 2.token格式
 
-Token格式为：
+#### Token格式为：authorization值#所登录移动云盘账号的手机号#00
 
 ![](image/6.png)
 
-authorization值#所登录移动云盘账号的手机号#00
+
